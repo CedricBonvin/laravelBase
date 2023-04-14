@@ -24,13 +24,10 @@ class User extends Authenticatable implements MustVerifyEmail
     protected $fillable = [
         'firstname',
         'lastname',
-        'username',
         'birthdate',
         'country',
-        'timezone',
         'email',
         'password',
-        'avatar'
     ];
 
     /**
@@ -52,27 +49,12 @@ class User extends Authenticatable implements MustVerifyEmail
         'email_verified_at' => 'datetime',
     ];
 
-    public function ratings(): HasMany
-    {
-        return $this->hasMany(Rating::class);
-    }
-
-    public function comments(): HasMany
-    {
-        return $this->hasMany(Comment::class);
-    }
-
-    public function games(): BelongsToMany
-    {
-        return $this->belongsToMany(Game::class, 'game_user', 'user_id', 'game_id');
-    }
 
     public static function getFilters(): array
     {
         return [
             'firstname',
             'lastname',
-            'nickname',
             'email',
             'created_at',
             'updated_at',
@@ -91,7 +73,6 @@ class User extends Authenticatable implements MustVerifyEmail
         return [
             'firstname',
             'lastname',
-            'nickname',
             'email',
             'created_at',
             'updated_at',
